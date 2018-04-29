@@ -8,20 +8,20 @@
 1. Add this 2 views in IBSng db:
 > - uname (UserNames):
 >    
->		SELECT 
+>		SELECT
 >     user_attrs.user_id,
->			user_attrs.attr_value AS uname
->		FROM 
->			user_attrs
+>     user_attrs.attr_value AS uname
+>   FROM
+>     user_attrs
 >		WHERE
 >     (user_attrs.attr_name = 'name'::text)
 > 
 > - ulock (User Lock):
 >    
->		SELECT 
+>		SELECT
 >     user_attrs.user_id,
 >			user_attrs.attr_value AS ulock
->		FROM 
+>		FROM
 >			user_attrs
 >		WHERE
 >     (user_attrs.attr_name = 'lock'::text)
@@ -31,19 +31,20 @@
 >		SELECT
 >     user_attrs.user_id,
 >			user_attrs.attr_value AS ucomment
->		FROM 
+>		FROM
 >			user_attrs
 >		WHERE
 >     (user_attrs.attr_name = 'comment'::text)
 >
 > - ullog (user last log id):
 >    
->   SELECT 
+>   SELECT
 >     max(connection_log.connection_log_id) AS last_log_id,
 >     connection_log.user_id
->   FROM 
+>   FROM
 >     connection_log
->   GROUP BY 
+>   GROUP BY
 >     connection_log.user_id
+
 2. Fill config/database.ini with appropriate data.
 3. Host app on your server.
