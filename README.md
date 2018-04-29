@@ -5,7 +5,7 @@
 
 ### Steps to run:
 
-1- Add this 2 views in IBSng db:
+1. Add this 2 views in IBSng db:
 > - uname (UserNames):
 >    
 >		SELECT user_attrs.user_id,
@@ -25,5 +25,5 @@
 >         GROUP BY 
 >            connection_log.user_id
                 
-2- Fill config/database.ini with appropriate data.
-3- Host app on your server.
+2. Fill config/database.ini with appropriate data.
+3. Host app on your server.
