@@ -10,7 +10,27 @@ def index(request):
     conn = psycopg2.connect(database=db['database'], user=db['user'], password=db['password'], host=db['host'], port=db['port'])
     cur = conn.cursor()
 
-    txt= "SELECT users.user_id, CASE WHEN normal_users.normal_username is NULL THEN '-' ELSE normal_users.normal_username END, CASE WHEN groups.group_name is NULL THEN '-' ELSE groups.group_name END, isp.isp_name, CASE WHEN connection_log_internet_details.remote_ip IS NULL THEN '-' WHEN connection_log_internet_details.remote_ip='' THEN '-' ELSE connection_log_internet_details.remote_ip END, CASE WHEN uname.uname is NULL THEN '-' ELSE uname.uname END, CASE WHEN users.status=0 THEN 'Package' ELSE 'Recharged' END,CASE WHEN online_users.online_status is NULL THEN 'FAILED' ELSE online_users.online_status END,	CASE WHEN ucomment.ucomment is NULL THEN '-' ELSE ucomment.ucomment END, CASE WHEN ulock.ulock is NULL THEN '-' ELSE ulock.ulock END FROM users LEFT JOIN normal_users ON normal_users.user_id = users.user_id JOIN isp ON users.isp_id = isp.isp_id LEFT JOIN groups ON groups.isp_id = isp.isp_id AND users.group_id = groups.group_id LEFT JOIN ullog ON normal_users.user_id = ullog.user_id LEFT JOIN connection_log_internet_details ON ullog.last_log_id = connection_log_internet_details.connection_log_id LEFT JOIN online_users ON users.user_id = online_users.user_id LEFT JOIN uname ON users.user_id = uname.user_id LEFT JOIN ucomment ON users.user_id = ucomment.user_id LEFT JOIN ulock ON users.user_id = ulock.user_id"
+    txt= """SELECT
+                  users.user_id,
+                  CASE WHEN normal_users.normal_username is NULL THEN '-' ELSE normal_users.normal_username END,
+                  CASE WHEN groups.group_name is NULL THEN '-' ELSE groups.group_name END, isp.isp_name,
+                  CASE WHEN connection_log_internet_details.remote_ip IS NULL THEN '-' WHEN connection_log_internet_details.remote_ip='' THEN '-' ELSE connection_log_internet_details.remote_ip END,
+                  CASE WHEN uname.uname is NULL THEN '-' ELSE uname.uname END,
+                  CASE WHEN users.status=0 THEN 'Package' ELSE 'Recharged' END,
+                  CASE WHEN online_users.online_status is NULL THEN 'FAILED' ELSE online_users.online_status END,
+                  CASE WHEN ucomment.ucomment is NULL THEN '-' ELSE ucomment.ucomment END,
+                  CASE WHEN ulock.ulock is NULL THEN '-' ELSE ulock.ulock END
+            FROM
+                  users
+            LEFT JOIN normal_users ON normal_users.user_id = users.user_id
+            JOIN isp ON users.isp_id = isp.isp_id
+            LEFT JOIN groups ON groups.isp_id = isp.isp_id AND users.group_id = groups.group_id
+            LEFT JOIN ullog ON normal_users.user_id = ullog.user_id
+            LEFT JOIN connection_log_internet_details ON ullog.last_log_id = connection_log_internet_details.connection_log_id
+            LEFT JOIN online_users ON users.user_id = online_users.user_id
+            LEFT JOIN uname ON users.user_id = uname.user_id
+            LEFT JOIN ucomment ON users.user_id = ucomment.user_id
+            LEFT JOIN ulock ON users.user_id = ulock.user_id"""
     cur.execute(txt)
     x = cur.fetchall()
 
