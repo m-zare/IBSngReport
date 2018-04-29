@@ -11,7 +11,7 @@
    - ucomment (User Comments)
    - ullog (user last log id)
 
-  code:
+ code:
   
     CREATE VIEW uname AS
 		SELECT user_attrs.user_id, user_attrs.attr_value AS uname
