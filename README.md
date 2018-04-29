@@ -14,7 +14,7 @@
 >			user_attrs
 >		WHERE
 >       	(user_attrs.attr_name = 'name'::text)
-            
+>            
 > - ullog (user last log id):
 >    
 >        SELECT 
@@ -26,5 +26,4 @@
 >            connection_log.user_id
                 
 2- Fill config/database.ini with appropriate data.
-
 3- Host app on your server.
