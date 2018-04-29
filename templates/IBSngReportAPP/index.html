@@ -31,14 +31,14 @@
             <thead>
               <th>{{ id }}</th>
               <th>{{ Iusername }}</th>
-              <th>{{ Vusername }}</th>
-              <th>{{ credit }}</th>
               <th>{{ group }}</th>
               <th>{{ isp }}</th>
               <th>{{ ip }}</th>
               <th>{{ name }}</th>
               <th>{{ status }}</th>
               <th>{{ online }}</th>
+              <th>{{ comment }}</th>
+              <th>{{ lock }}</th>
             </thead>
             <tbody>
               {% for row in data %}
@@ -50,20 +50,18 @@
                   <td>{{ row.4 }}</td>
                   <td>{{ row.5 }}</td>
                   <td>{{ row.6 }}</td>
-                  <td>{{ row.7 }}</td>
-                  <td>{{ row.8 }}</td>
-                  {% if row.9 == "ONLINE" %}
+                  {% if row.7 == "ONLINE" %}
                     <td>OnLine</td>
                   {% else %}
                     <td>OffLine</td>
                   {% endif %}
+                  <td>{{ row.8 }}</td>
+                  <td>{{ row.9 }}</td>
                 </tr>
               {% endfor %}
             </tbody>
             <tfoot>
               <th>{{ id }}</th>
-              <th>{{ Iusername }}</th>
-              <th>{{ Vusername }}</th>
               <th>{{ credit }}</th>
               <th>{{ group }}</th>
               <th>{{ isp }}</th>
@@ -71,6 +69,8 @@
               <th>{{ name }}</th>
               <th>{{ status }}</th>
               <th>{{ online }}</th>
+              <th>{{ comment }}</th>
+              <th>{{ lock }}</th>
             </tfoot>
           </table>
         </div>
