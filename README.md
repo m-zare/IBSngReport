@@ -48,3 +48,12 @@
 
 2. Fill config/database.ini with appropriate data.
 3. Host app on your server.
+
+
+>	SELECT
+>		user_attrs.user_id,
+>		user_attrs.attr_value AS uname
+>	FROM
+>		user_attrs
+>	WHERE
+>		(user_attrs.attr_name = 'name'::text)
