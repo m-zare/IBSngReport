@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>IBSng User Login</title>
+
+    <link rel="stylesheet" href="{% static "/css/login.css"%}">
+    <link rel="stylesheet" href="{% static "/css/bootstrap.css"%}">
+    <link rel="stylesheet" href="{% static "/css/dataTables.bootstrap4.min.css"%}">
+
+    <script src="{% static "/js/jquery-1.12.4.js"%}" charset="utf-8"></script>
+    <script src="{% static "/js/jquery.dataTables.min.js"%}" charset="utf-8"></script>
+    <script src="{% static "/js/dataTables.bootstrap4.min.js"%}" charset="utf-8"></script>
+    <script src="{% static "/js/script.js"%}" charset="utf-8"></script>
+  </head>
+  <body>
+
+    <div class="container">
+        <div class="wrapper col col-xs-4">
+          <form class="form-signin" action="{% url "user_login" %}" method="post">
+            <h4 class="form-signin-heading">Please login</h2><br>
+            {% csrf_token %}
+            <input type="text" class="form-control" name="username" placeholder="Enter Username!" />
+            <input type="password" class="form-control" name="password" placeholder="Password" required=""/><br>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+          </form>
+        </div>
+    </div>
+  </body>
+</html>

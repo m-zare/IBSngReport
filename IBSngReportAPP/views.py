@@ -1,9 +1,13 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 import psycopg2
 from psycopg2 import sql
 from IBSngReport import configParser
 
+@login_required
 def index(request):
     db = configParser.config('database.ini', 'postgresql')
 
@@ -34,7 +38,6 @@ def index(request):
     cur.execute(txt)
     x = cur.fetchall()
 
-    print(x[1])
     my_dict={
         'id':"User ID",
         'Iusername':"Internet Username",
@@ -52,3 +55,28 @@ def index(request):
     cur.close()
     conn.close()
     return render(request,'IBSngReportAPP/index.html',context=my_dict)
+
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+
+        if user:
+            if user.is_active:
+                login(request,user)
+                return HttpResponseRedirect(reverse('index'))
+
+            else:
+                return HttpResponse('Not Active!')
+        else:
+            print("username: {} and password: {} tried to login".format(username,password))
+            return HttpResponse("Invalid Login!")
+    else:
+        return render (request, 'IBSngReportAPP/login.html')
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('user_login'))

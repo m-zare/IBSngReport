@@ -9,24 +9,47 @@
     <link rel="stylesheet" href="{% static "/css/dataTables.bootstrap4.min.css"%}">
     <link rel="stylesheet" href="{% static "/css/style.css"%}">
 
-
     <script src="{% static "/js/jquery-1.12.4.js"%}" charset="utf-8"></script>
     <script src="{% static "/js/jquery.dataTables.min.js"%}" charset="utf-8"></script>
     <script src="{% static "/js/dataTables.bootstrap4.min.js"%}" charset="utf-8"></script>
     <script src="{% static "/js/script.js"%}" charset="utf-8"></script>
   </head>
-  <body>
-      <div class="jumbotron text-center">
-        <h1>IBSng Users List</h1>
-      </div>
 
-      <div class="container">
+  <body>
+    <nav class="navbar" style="background-color: #990000;">
+      <a class="navbar-brand" href="#">
+        <img src="/static/images/logo.gif" height="40" alt="">
+      </a>
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <form action="{% url "user_logout" %}" method="post">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-bd-download" value="Logout">
+          </form>
+        </li>
+      </ul>
+    </nav>
+
+    <table style="width:100%;">
+      <thead>
+        <th style="background-color: #FFAA00; height:20px" />
+        <th style="background-color: #FFAA00; height:20px" />
+      </thead>
+      <tbody>
+        <tr>
+          <td style="background-color: #e4e1e1; width:150px; font-weight: bold; font-size: 14px;">IBSng Users List</td>
+        </tr>
+        <tr style="height:50px">
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="container" style="margin-bottom: 50px">
       <div class="row">
         <div class="col col-xs-4">
           <div class="alert alert-success">
             <strong>Total Rows: {{ total }}</a>
           </div>
-
           <table id="data" class="table table-striped table-bordered">
             <thead>
               <th>{{ id }}</th>
@@ -76,5 +99,6 @@
         </div>
       </div>
     </div>
+    <div class="card-footer text-muted" style="background-color: #990000; height:50px"/>
   </body>
 </html>
