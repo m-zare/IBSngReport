@@ -2,7 +2,7 @@ argon2-cffi==18.1.0
 bcrypt==3.1.4
 certifi==2018.4.16
 cffi==1.11.5
-Django==2.0.2
+Django==2.0.4
 Faker==0.8.13
 Pillow==5.1.0
 psycopg2==2.7.4
